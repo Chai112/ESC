@@ -10,7 +10,7 @@
 #define GL_TEXTURE_FILE "/Users/chaidhatchaimongkol/Documents/ESC/ESC/ESC/gl.bmp"
 
 bool restart_gl_log() {
-    FILE* file = fopen(GL_LOG_FILE, "w");
+    FILE* file = fopen(GL_LOG_FILE, "w" );
     if(!file) {
         fprintf(stderr,
                 "ERROR: could not open GL_LOG_FILE log file %s for writing\n",
