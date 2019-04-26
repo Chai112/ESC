@@ -182,22 +182,22 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
     xMouse = xpos / -100;
     //if (sinf(((-yMouse-4.5)/4.5)*180*0.01745329252) > -0.99)
         //yMo += 1;
-    if (ypos < yMo)
+    if (ypos - yMoo < yMo)
     {
         yMoo = ypos - yMo;
-        yMouse = (ypos + yMoo / -100);
+        yMouse = ((ypos - yMoo) / -100);
     }
     else
     {
-        if (sinf((((ypos + yMoo / -100)-4.5)/4.5)*180*0.01745329252) > -0.99)
+        if (sinf(((((ypos - yMoo) / -100)-4.5)/4.5)*180*0.01745329252) > -0.99)
         {
             yMo = -99999;
-            yMouse = (ypos + yMoo / -100);
+            yMouse = ((ypos - yMoo) / -100);
         }
         else
         {
             if (yMo == -99999)
-                yMo = ypos + yMoo;
+                yMo = ypos - yMoo;
         }
     }
 }
