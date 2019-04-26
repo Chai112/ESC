@@ -6,8 +6,8 @@
 #include <time.h>
 #include <stdarg.h>
 #include <assert.h>
-#define GL_LOG_FILE "/Users/chaidhatchaimongkol/Documents/Me/Xcode/ESC/ESC/gl.log"
-#define GL_TEXTURE_FILE "/Users/chaidhatchaimongkol/Desktop/gl.bmp"
+#define GL_LOG_FILE "/Users/chaidhatchaimongkol/Documents/ESC/ESC/ESC/gl.log"
+#define GL_TEXTURE_FILE "/Users/chaidhatchaimongkol/Documents/ESC/ESC/ESC/gl.bmp"
 
 bool restart_gl_log() {
     FILE* file = fopen(GL_LOG_FILE, "w");
@@ -184,7 +184,7 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
         //yo += 1;
     if (ypos < yo)
     {
-        yoo = yo - ypos
+        yoo = yo - ypos;
         yMouse = (ypos + yoo / -100);
     }
     else
