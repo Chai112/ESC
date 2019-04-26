@@ -171,8 +171,8 @@ static const GLfloat g_vertex_buffer_data[] = {
 
 double xMouse;
 double yMouse;
-double yo = 0;
-double yoo = 0;
+double yMo = 0;
+double yMoo = 0;
 glm::vec3 playerTransform = glm::vec3(4,3,3);
 glm::vec3 playerVelocity = glm::vec3(0);
 glm::vec3 playerAccel = glm::vec3(0);
@@ -181,23 +181,23 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 {
     xMouse = xpos / -100;
     //if (sinf(((-yMouse-4.5)/4.5)*180*0.01745329252) > -0.99)
-        //yo += 1;
-    if (ypos < yo)
+        //yMo += 1;
+    if (ypos < yMo)
     {
-        yoo = ypos - yo;
-        yMouse = (ypos + yoo / -100);
+        yMoo = ypos - yMo;
+        yMouse = (ypos + yMoo / -100);
     }
     else
     {
-        if (sinf((((ypos + yoo / -100)-4.5)/4.5)*180*0.01745329252) > -0.99)
+        if (sinf((((ypos + yMoo / -100)-4.5)/4.5)*180*0.01745329252) > -0.99)
         {
-            yo = -99999;
-            yMouse = (ypos + yoo / -100);
+            yMo = -99999;
+            yMouse = (ypos + yMoo / -100);
         }
         else
         {
-            if (yo == -99999)
-                yo = ypos + yoo;
+            if (yMo == -99999)
+                yMo = ypos + yMoo;
         }
     }
 }
