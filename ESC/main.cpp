@@ -6,6 +6,7 @@
 #include <time.h>
 #include <stdarg.h>
 #include <assert.h>
+#include "mouseInput.cpp"
 #define GL_LOG_FILE "/Users/chaidhatchaimongkol/Documents/ESC/ESC/ESC/gl.log"
 #define GL_TEXTURE_FILE "/Users/chaidhatchaimongkol/Documents/ESC/ESC/ESC/gl.bmp"
 
@@ -189,7 +190,7 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
     }
     else
     {
-        if (sinf(((((ypos - yMoo) / -100)-4.5)/4.5)*180*0.01745329252) > -0.99)
+        if ((cosf(((-(ypos - yMoo) / -100)-4.5)/4.5)*180*0.01745329252) > 0)
         {
             yMo = -99999;
             yMouse = ((ypos - yMoo) / -100);
@@ -204,6 +205,7 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 
 
 int main() {
+    printf("%f", mouseIn::Input());
     assert(restart_gl_log());
     // start GL context and O/S window using the GLFW helper library
     gl_log("starting GLFW\n%s\n", glfwGetVersionString());

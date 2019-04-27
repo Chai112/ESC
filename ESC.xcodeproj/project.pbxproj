@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE1D7FD42273FE8900901CDE /* mouseInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE1D7FD22273FE8900901CDE /* mouseInput.cpp */; };
 		EE5792A2226DE29A00BB89EC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE5792A1226DE29A00BB89EC /* main.cpp */; };
 		EE5792AC226DE34700BB89EC /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5792AB226DE34700BB89EC /* libGLEW.2.1.0.dylib */; };
 		EE5792AE226DE36500BB89EC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5792AD226DE36500BB89EC /* OpenGL.framework */; };
@@ -27,6 +28,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EE1D7FD22273FE8900901CDE /* mouseInput.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mouseInput.cpp; sourceTree = "<group>"; };
+		EE1D7FD32273FE8900901CDE /* mouseInput.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mouseInput.hpp; sourceTree = "<group>"; };
 		EE57929E226DE29A00BB89EC /* ESC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ESC; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE5792A1226DE29A00BB89EC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		EE5792AB226DE34700BB89EC /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
@@ -72,6 +75,8 @@
 			isa = PBXGroup;
 			children = (
 				EE5792A1226DE29A00BB89EC /* main.cpp */,
+				EE1D7FD22273FE8900901CDE /* mouseInput.cpp */,
+				EE1D7FD32273FE8900901CDE /* mouseInput.hpp */,
 				EEC6A4622272FCCD00ACA7EA /* gl.log */,
 			);
 			path = ESC;
@@ -144,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE1D7FD42273FE8900901CDE /* mouseInput.cpp in Sources */,
 				EE5792A2226DE29A00BB89EC /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
