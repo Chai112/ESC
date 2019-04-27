@@ -13,6 +13,9 @@
 		EE5792AE226DE36500BB89EC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5792AD226DE36500BB89EC /* OpenGL.framework */; };
 		EE5792B3226DE94C00BB89EC /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5792B2226DE94C00BB89EC /* libglfw.3.3.dylib */; };
 		EE5792BC2270461F00BB89EC /* glm.pc in Frameworks */ = {isa = PBXBuildFile; fileRef = EE5792BB2270461F00BB89EC /* glm.pc */; };
+		EE7BB2A22274225E002774C7 /* debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE7BB2A02274225E002774C7 /* debug.cpp */; };
+		EE7BB2A5227423E3002774C7 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE7BB2A3227423E3002774C7 /* texture.cpp */; };
+		EE7BB2AE227437E7002774C7 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE7BB2AC227437E7002774C7 /* shader.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,6 +39,12 @@
 		EE5792B2226DE94C00BB89EC /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../../../usr/local/Cellar/glfw/3.3/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		EE5792BB2270461F00BB89EC /* glm.pc */ = {isa = PBXFileReference; lastKnownFileType = text; name = glm.pc; path = ../../../../../../usr/local/Cellar/glm/0.9.9.5/lib/pkgconfig/glm.pc; sourceTree = "<group>"; };
 		EE7BB29E22742071002774C7 /* log */ = {isa = PBXFileReference; lastKnownFileType = folder; path = log; sourceTree = "<group>"; };
+		EE7BB2A02274225E002774C7 /* debug.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = debug.cpp; sourceTree = "<group>"; };
+		EE7BB2A12274225E002774C7 /* debug.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = debug.hpp; sourceTree = "<group>"; };
+		EE7BB2A3227423E3002774C7 /* texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = texture.cpp; path = ESC/render/texture.cpp; sourceTree = SOURCE_ROOT; };
+		EE7BB2A4227423E3002774C7 /* texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
+		EE7BB2AC227437E7002774C7 /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
+		EE7BB2AD227437E7002774C7 /* shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shader.hpp; sourceTree = "<group>"; };
 		EEB1AB8E227407D300CC684B /* mouseInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mouseInput.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,8 +85,11 @@
 			children = (
 				EE7BB29E22742071002774C7 /* log */,
 				EE5792A1226DE29A00BB89EC /* main.cpp */,
+				EE7BB2A6227424DE002774C7 /* render */,
 				EE1D7FD22273FE8900901CDE /* mouseInput.cpp */,
 				EEB1AB8E227407D300CC684B /* mouseInput.hpp */,
+				EE7BB2A02274225E002774C7 /* debug.cpp */,
+				EE7BB2A12274225E002774C7 /* debug.hpp */,
 			);
 			path = ESC;
 			sourceTree = "<group>";
@@ -91,6 +103,17 @@
 				EE5792AB226DE34700BB89EC /* libGLEW.2.1.0.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EE7BB2A6227424DE002774C7 /* render */ = {
+			isa = PBXGroup;
+			children = (
+				EE7BB2AC227437E7002774C7 /* shader.cpp */,
+				EE7BB2AD227437E7002774C7 /* shader.hpp */,
+				EE7BB2A3227423E3002774C7 /* texture.cpp */,
+				EE7BB2A4227423E3002774C7 /* texture.hpp */,
+			);
+			path = render;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,8 +172,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE7BB2AE227437E7002774C7 /* shader.cpp in Sources */,
 				EE1D7FD42273FE8900901CDE /* mouseInput.cpp in Sources */,
+				EE7BB2A22274225E002774C7 /* debug.cpp in Sources */,
 				EE5792A2226DE29A00BB89EC /* main.cpp in Sources */,
+				EE7BB2A5227423E3002774C7 /* texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,6 +1,11 @@
-GL_LOG_FILE log. local time Sat Apr 27 12:35:04 2019
+GL_LOG_FILE log. local time Sat Apr 27 19:09:52 2019
 
 starting GLFW
 3.3.0 Cocoa NSGL EGL OSMesa dynamic
+GLFW ERROR: code 65537 msg: The GLFW library is not initialized
+GLFW ERROR: code 65537 msg: The GLFW library is not initialized
+GLFW ERROR: code 65537 msg: The GLFW library is not initialized
+GLFW ERROR: code 65537 msg: The GLFW library is not initialized
+GLFW ERROR: code 65537 msg: The GLFW library is not initialized
 
-Initialised Successfully. Apr 27 2019 12:35:01 
+Initialised Successfully. Apr 27 2019 19:09:51 
