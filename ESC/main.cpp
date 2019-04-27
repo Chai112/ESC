@@ -1,3 +1,11 @@
+//
+//  main.cpp
+//  ESC
+//
+//  Created by Chaidhat Chaimongkol on 22/04/2019.
+//  Copyright © 2019 Chai112. All rights reserved.
+//
+
 #include <GL/glew.h> // include GLEW and new version of GL on Windows
 #include <GLFW/glfw3.h> // GLFW helper library
 #include <stdio.h>
@@ -6,7 +14,9 @@
 #include <time.h>
 #include <stdarg.h>
 #include <assert.h>
-#include "mouseInput.cpp"
+
+#include "mouseInput.hpp"
+
 #define GL_LOG_FILE "/Users/chaidhatchaimongkol/Documents/ESC/ESC/ESC/gl.log"
 #define GL_TEXTURE_FILE "/Users/chaidhatchaimongkol/Documents/ESC/ESC/ESC/gl.bmp"
 
@@ -205,7 +215,7 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 
 
 int main() {
-    printf("%f", mouseIn::Input());
+    printf("%f", MouseIn::input());
     assert(restart_gl_log());
     // start GL context and O/S window using the GLFW helper library
     gl_log("starting GLFW\n%s\n", glfwGetVersionString());

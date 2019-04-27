@@ -8,11 +8,7 @@
 
 #include "mouseInput.hpp"
 
-class mouseIn
+float MouseIn::input ()
 {
-    public:
-        static float Input ()
-        {
-            return 1.0f;
-        }
-};
+    return 1.0f;
+}

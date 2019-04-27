@@ -9,8 +9,10 @@
 #ifndef mouseInput_hpp
 #define mouseInput_hpp
 
-#include <stdio.h>
-
-double mouseIn ();
+class MouseIn
+{
+public:
+    static float input ();
+};
 
 #endif /* mouseInput_hpp */
