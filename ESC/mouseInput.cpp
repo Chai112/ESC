@@ -9,16 +9,18 @@
 #include "mouseInput.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 
-//glm::vec3((sinf(((-xMouse-7)/7)*180*0.01745329252) * zl), yl, (cosf(((-xMouse-7)/7)*180*0.01745329252) * zl)) + playerTransform, // and looks at the origin
-
 double MouseIn::xMouse() {   return MouseIn::xPos / -100;    }
 
 double MouseIn::yMouse() {   return MouseIn::yPos / -100;    }
 
+
+// private yMouse coords
 float MouseIn::yl() {   return sinf(((MouseIn::yMouse()-4.5)/4.5)*180*0.01745329252);     }
 
 float MouseIn::zl() {   return cosf(((-MouseIn::yMouse()-4.5)/4.5)*180*0.01745329252);    }
 
+
+// public coords
 float MouseIn::x() {   return sinf(((-MouseIn::xMouse()-7)/7)*180*0.01745329252) * MouseIn::zl();  }
 
 float MouseIn::y() {   return MouseIn::yl();   }
