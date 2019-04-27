@@ -11,8 +11,23 @@
 
 class MouseIn
 {
+    
 public:
-    static float input ();
+    double xPos;
+    double yPos;
+    
+    float x ();
+    float y ();
+    float z ();
+    
+private:
+    float yl ();
+    float zl ();
+    
+    double xMouse ();
+    double yMouse ();
+    double yMo = 0;
+    double yMoo = 0;
 };
 
 #endif /* mouseInput_hpp */

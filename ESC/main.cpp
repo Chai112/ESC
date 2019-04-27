@@ -180,17 +180,18 @@ static const GLfloat g_vertex_buffer_data[] = {
     1.0f,-1.0f, 1.0f
 };
 
-double xMouse;
-double yMouse;
-double yMo = 0;
-double yMoo = 0;
+MouseIn mouse;
 glm::vec3 playerTransform = glm::vec3(4,3,3);
 glm::vec3 playerVelocity = glm::vec3(0);
 glm::vec3 playerAccel = glm::vec3(0);
 
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-    xMouse = xpos / -100;
+    mouse.xPos = xpos;
+    mouse.yPos = ypos;
+    //MouseIn::yPos = ypos;
+    
+    /*xMouse = xpos / -100;
     //if (sinf(((-yMouse-4.5)/4.5)*180*0.01745329252) > -0.99)
         //yMo += 1;
     if (ypos - yMoo < yMo)
@@ -210,12 +211,11 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
             if (yMo == -99999)
                 yMo = ypos - yMoo;
         }
-    }
+    }*/
 }
 
 
 int main() {
-    printf("%f", MouseIn::input());
     assert(restart_gl_log());
     // start GL context and O/S window using the GLFW helper library
     gl_log("starting GLFW\n%s\n", glfwGetVersionString());
@@ -321,13 +321,13 @@ int main() {
         }
         
         if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_UP)) {
-            playerAccel = glm::vec3(sinf(((-xMouse-7)/7)*180*0.01745329252), 0, cosf(((-xMouse-7)/7)*180*0.01745329252));
+            //playerAccel = glm::vec3(sinf(((-xMouse-7)/7)*180*0.01745329252), 0, cosf(((-xMouse-7)/7)*180*0.01745329252));
         }
         else if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_DOWN)) {
-                playerAccel = glm::vec3(-sinf(((-xMouse-7)/7)*180*0.01745329252), 0, -cosf(((-xMouse-7)/7)*180*0.01745329252));
+                //playerAccel = glm::vec3(-sinf(((-xMouse-7)/7)*180*0.01745329252), 0, -cosf(((-xMouse-7)/7)*180*0.01745329252));
         }
         else if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_LEFT)) {
-            playerAccel = glm::vec3(-cosf(((-xMouse-7)/7)*180*0.01745329252), 0, -sinf(((-xMouse-7)/7)*180*0.01745329252));
+            //playerAccel = glm::vec3(-cosf(((-xMouse-7)/7)*180*0.01745329252), 0, -sinf(((-xMouse-7)/7)*180*0.01745329252));
         }
         else
         {
@@ -356,7 +356,7 @@ int main() {
         glBindVertexArray(vao);
         // draw points 0-3 from the currently bound VAO with current in-use shader
         
-        float yl = sinf(((yMouse-4.5)/4.5)*180*0.01745329252);
+        /*float yl = sinf(((yMouse-4.5)/4.5)*180*0.01745329252);
         float zl = 1;
         if (cosf(((-yMouse-4.5)/4.5)*180*0.01745329252) > 0)
         {
@@ -364,7 +364,7 @@ int main() {
         }
         else
         {
-        }
+        }*/
         
         //cosf(((yMouse-4.5)/4.5)*180*0.01745329252) + 3
         
@@ -372,11 +372,12 @@ int main() {
         glm::mat4 View = glm::lookAt(
                                      playerTransform, // Camera is at (4,3,3), in World Space
                                      //glm::vec3(sinf(((xMouse-7)/7)*180*0.01745329252) + 4, 3, cosf(((xMouse-7)/7)*180*0.01745329252) + 3), // and looks at the origin
-                                     glm::vec3((sinf(((-xMouse-7)/7)*180*0.01745329252) * zl), yl, (cosf(((-xMouse-7)/7)*180*0.01745329252) * zl)) + playerTransform, // and looks at the origin
+                                     //glm::vec3((sinf(((-xMouse-7)/7)*180*0.01745329252) * zl), yl, (cosf(((-xMouse-7)/7)*180*0.01745329252) * zl)) + playerTransform, // and looks at the origin
+                                     glm::vec3(mouse.x(), mouse.y(), mouse.z()) + playerTransform,
                                      glm::vec3(0,0.5,0)  // Head is up (set to 0,-1,0 to look upside-down)
                                      );
         
-        gl_log("\nx %f %f\n", yMouse * 100, sinf(((yMouse-4.5)/4.5)*180*0.01745329252));
+        //gl_log("\nx %f %f\n", yMouse * 100, sinf(((yMouse-4.5)/4.5)*180*0.01745329252));
         
         // Model matrix : an identity matrix (model will be at the origin)
         glm::mat4 Model = glm::mat4(1.0f);
