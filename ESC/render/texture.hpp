@@ -10,10 +10,12 @@
 #define visual_texture_hpp
 
 #include <stdio.h>
+#include <GL/glew.h>
 #include <GLFW/glfw3.h> // GLFW helper library
 
 class V_Texture
 {
+public:
     //GLuint loadBMP_custom(const char * imagepath);
     //GLuint image = loadBMP_custom("./my_texture.bmp");
     

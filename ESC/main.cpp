@@ -129,6 +129,41 @@ int main() {
         
         glfwSetCursorPosCallback(shader.window, cursor_position_callback);
         
+        // Get a handle for our "myTextureSampler" uniform
+        GLuint TextureID  = glGetUniformLocation(shader.shader_programme, "myTextureSampler");
+        
+        GLuint Texture = texture.load();
+        
+        // Bind our texture in Texture Unit 0
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, Texture);
+        // Set our "myTextureSampler" sampler to use Texture Unit 0
+        glUniform1i(TextureID, 0);
+        
+        // 1rst attribute buffer : vertices
+        glEnableVertexAttribArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, shader.vbo);
+        glVertexAttribPointer(
+                              0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
+                              3,                  // size
+                              GL_FLOAT,           // type
+                              GL_FALSE,           // normalized?
+                              0,                  // stride
+                              (void*)0            // array buffer offset
+                              );
+        
+        // 2nd attribute buffer : UVs
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, shader.vuv);
+        glVertexAttribPointer(
+                              1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
+                              2,                                // size : U+V => 2
+                              GL_FLOAT,                         // type
+                              GL_FALSE,                         // normalized?
+                              0,                                // stride
+                              (void*)0                          // array buffer offset
+                              );
+        
         shader.update();
         
         
