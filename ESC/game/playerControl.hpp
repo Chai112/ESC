@@ -24,6 +24,10 @@ public:
     glm::vec3 velocity;
     
     void update (GLFWwindow* window, MouseIn mouseIn);
+    
+private:
+    short keyPx = 0;
+    short keyPy = 0;
 };
 
 #endif /* playerControl_hpp */
