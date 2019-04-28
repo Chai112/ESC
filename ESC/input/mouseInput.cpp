@@ -7,6 +7,8 @@
 //
 
 #include "mouseInput.hpp"
+
+#include <GLFW/glfw3.h> // GLFW helper library
 #include <glm/gtc/matrix_transform.hpp>
 
 double MouseIn::xMouse() {   return MouseIn::xPos / -100;    }
@@ -26,3 +28,5 @@ float MouseIn::x() {   return sinf(((-MouseIn::xMouse()-7)/7)*180*0.01745329252)
 float MouseIn::y() {   return MouseIn::yl();   }
 
 float MouseIn::z() {   return cosf(((-MouseIn::xMouse()-7)/7)*180*0.01745329252) * MouseIn::zl();  }
+
+int MouseIn::init (GLFWwindow* window) { glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED); return 0;}

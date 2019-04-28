@@ -7,6 +7,7 @@
 //
 
 #include "texture.hpp"
+
 #include <GLFW/glfw3.h> // GLFW helper library
 
 #define GL_TEXTURE_FILE "/Users/chaidhatchaimongkol/Documents/ESC/gl.bmp"

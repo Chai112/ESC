@@ -15,15 +15,27 @@
 #include <stdarg.h>
 #include <assert.h>
 
-#include "mouseInput.hpp"
-#include "debug.hpp"
+#include "game/playerControl.hpp"
+#include "game/playerPhysics.hpp"
+
+#include "input/mouseInput.hpp"
+
 #include "render/texture.hpp"
 #include "render/shader.hpp"
+#include "render/perspective.hpp"
 
-MouseIn mouse;
-Debug debug;
+#include "debug.hpp"
+
+MouseIn mouseIn;
+
+G_PlayerControl playerControl;
+G_PlayerPhysics playerPhysics;
+
 V_Texture texture;
 V_Shader shader;
+V_Perspective perspective;
+
+Debug debug;
 
 #define GL_LOG_FILE "/Users/chaidhatchaimongkol/Documents/ESC/ESC/log/gl.log"
 #define GL_TEXTURE_FILE "/Users/chaidhatchaimongkol/Documents/ESC/gl.bmp"
@@ -71,14 +83,10 @@ static const GLfloat g_vertex_buffer_data[] = {
     1.0f,-1.0f, 1.0f
 };
 
-glm::vec3 playerTransform = glm::vec3(4,3,3);
-glm::vec3 playerVelocity = glm::vec3(0);
-glm::vec3 playerAccel = glm::vec3(0);
-
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-    mouse.xPos = xpos;
-    mouse.yPos = ypos;
+    mouseIn.xPos = xpos;
+    mouseIn.yPos = ypos;
 }
 
 
@@ -89,6 +97,8 @@ int main() {
     // register the error call-back function that we wrote, above
     glfwSetErrorCallback(glfw_error_callback);
     
+    playerPhysics.playerTransform = glm::vec3(4,3,3);
+    
     // uncomment these lines if on Apple OS xMouse
     glfwWindowHint(GLFW_SAMPLES, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -98,70 +108,28 @@ int main() {
     
     if (shader.init() == 1)
         return 1;
-    GLFWwindow* window = shader.window;
     
-    // Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-    glm::mat4 Projection = glm::perspective(glm::radians(45.0f), (float) 4 / (float)3, 0.1f, 100.0f);
-    
-    // Or, for an ortho camera :
-    //glm::mat4 Projection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,0.0f,100.0f); // In world coordinates
+    if (mouseIn.init(shader.window) == 1)
+        return 1;
     
 
     bool init = false;
     
-    while(!glfwWindowShouldClose(window)) {
-        if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE)) {
-            glfwSetWindowShouldClose(window, 1);
+    while(!glfwWindowShouldClose(shader.window)) {
+        if (GLFW_PRESS == glfwGetKey(shader.window, GLFW_KEY_ESCAPE)) {
+            glfwSetWindowShouldClose(shader.window, 1);
         }
         
-        if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_UP)) {
-            playerAccel = glm::vec3(mouse.x(), 0, mouse.z());
-        }
-        else if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_DOWN)) {
-            playerAccel = glm::vec3(-mouse.x(), 0, -mouse.z());
-        }
-        else if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_LEFT)) {
-            playerAccel = glm::vec3(mouse.z(), 0, -mouse.x());
-        }
-        else if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_RIGHT)) {
-            playerAccel = glm::vec3(-mouse.z(), 0, mouse.x());
-        }
+        playerControl.velocity = playerPhysics.playerVelocity;
+        playerControl.update(shader.window, mouseIn);
         
-        playerAccel = playerVelocity * glm::vec3(-0.1);
-        playerVelocity = playerVelocity + (playerAccel / glm::vec3(1));
+        playerPhysics.playerAccel = playerControl.accel;
+        playerPhysics.update();
+        perspective.update(shader.window, mouseIn, playerPhysics.playerTransform, shader.shader_programme);
         
-        playerTransform = playerTransform + (playerVelocity / glm::vec3(1000));
-        
-        // draw points 0-3 from the currently bound VAO with current in-use shader
-        
-        // Camera matrix
-        glm::mat4 View = glm::lookAt(
-                                     playerTransform, // Camera is at (4,3,3), in World Space
-                                     glm::vec3(mouse.x(), mouse.y(), mouse.z()) + playerTransform,
-                                     glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
-                                     );
-        
-        //gl_log("\nx %f %f\n", yMouse * 100, sinf(((yMouse-4.5)/4.5)*180*0.01745329252));
-        
-        // Model matrix : an identity matrix (model will be at the origin)
-        glm::mat4 Model = glm::mat4(1.0f);
-        // Our ModelViewProjection : multiplication of our 3 matrices
-        glm::mat4 mvp = Projection * View * Model; // Remember, matrix multiplication is the other way around
-        
-        // Get a handle for our "MVP" uniform
-        // Only during the initialisation
-        GLuint MatrixID = glGetUniformLocation(shader.shader_programme, "MVP");
-        
-        glfwSetCursorPosCallback(window, cursor_position_callback);
-        
-        // Send our transformation to the currently bound shader, in the "MVP" uniform
-        // This is done in the main loop since each model will have a different MVP matrix (At least for the M part)
-        glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &mvp[0][0]);
-        
+        glfwSetCursorPosCallback(shader.window, cursor_position_callback);
         
         shader.update();
-        
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         
         
         if (!init)

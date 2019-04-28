@@ -9,6 +9,8 @@
 #ifndef mouseInput_hpp
 #define mouseInput_hpp
 
+#include <GLFW/glfw3.h> // GLFW helper library
+
 class MouseIn
 {
     
@@ -41,6 +43,8 @@ public:
     float x ();
     float y ();
     float z ();
+    
+    int init (GLFWwindow* window);
     
 private:
     float yl ();
