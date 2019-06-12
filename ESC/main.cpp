@@ -23,7 +23,6 @@
 #include "render/texture.hpp"
 #include "render/shader.hpp"
 #include "render/perspective.hpp"
-
 #include "debug.hpp"
 
 MouseIn mouseIn;
